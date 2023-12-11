@@ -9,6 +9,7 @@ public class BacktrackMazeGenerator {
 	
 	private static int[][] maze = new int[width][height];
 	private static boolean[][] visited = new boolean[width][height];
+	private static Random random = new Random();
 	
 	private static final int WALL = 1;
 	private static final int EMPTY = 0;
@@ -23,7 +24,7 @@ public class BacktrackMazeGenerator {
 		maze[x][y] = EMPTY;
 		maze[width-1][height-1] = EXIT;
 		
-		generatePath(x, y, new Random());
+		generatePath(x, y, random.nextInt(4));
 		
 		print();
 	}
@@ -45,7 +46,7 @@ public class BacktrackMazeGenerator {
 	}
 
 	// Makes path by inputing number 0 - EMPTY in one of the four directions
-	private static boolean generatePath(int x, int y, Random random) {
+	private static boolean generatePath(int x, int y, int direction) {
 		
 		if (maxCalls-- == 0) 
 			throw new IllegalStateException("Too many calls of the recursive method! "
@@ -57,7 +58,7 @@ public class BacktrackMazeGenerator {
 		
 		if (maze[x][y] == EXIT) return true;
 
-		int direction = random.nextInt(4);
+		direction = random.nextInt(4);
 		visited[x][y] = true;
 		maze[x][y] = EMPTY;
 
@@ -65,73 +66,73 @@ public class BacktrackMazeGenerator {
 		
 		switch (direction) {
 		case 0:
-			if (generatePath(x + 1, y, new Random())) {
+			if (generatePath(x + 1, y, direction)) {
 				maxCalls++;
 				return true;
 			}
-			if (generatePath(x - 1, y, new Random())) {
+			if (generatePath(x - 1, y, direction)) {
 				maxCalls++;
 				return true;
 			}
-			if (generatePath(x, y + 1, new Random())) {
+			if (generatePath(x, y + 1, direction)) {
 				maxCalls++;
 				return true;
 			}
-			if (generatePath(x, y - 1, new Random())) {
+			if (generatePath(x, y - 1, direction)) {
 				maxCalls++;
 				return true;
 			}
 			break;
 		case 1:
-			if (generatePath(x - 1, y, new Random())) {
+			if (generatePath(x - 1, y, direction)) {
 				maxCalls++;
 				return true;
 			}
-			if (generatePath(x + 1, y, new Random())) {
+			if (generatePath(x + 1, y, direction)) {
 				maxCalls++;
 				return true;
 			}
-			if (generatePath(x, y + 1, new Random())) {
+			if (generatePath(x, y + 1, direction)) {
 				maxCalls++;
 				return true;
 			}
-			if (generatePath(x, y - 1, new Random())) {
+			if (generatePath(x, y - 1, direction)) {
 				maxCalls++;
 				return true;
 			}
 			break;
 		case 2:
-			if (generatePath(x, y + 1, new Random())) {
+			if (generatePath(x, y + 1, direction)) {
 				maxCalls++;
 				return true;
 			}
-			if (generatePath(x + 1, y, new Random())) {
+			if (generatePath(x + 1, y, direction)) {
 				maxCalls++;
 				return true;
 			}
-			if (generatePath(x - 1, y, new Random())) {
+			if (generatePath(x - 1, y, direction)) {
 				maxCalls++;
 				return true;
 			}
-			if (generatePath(x, y - 1, new Random())) {
+			if (generatePath(x, y - 1, direction)) {
 				maxCalls++;
 				return true;
 			}
 			break;
 		case 3:
-			if (generatePath(x, y - 1, new Random())) {
+			if (generatePath(x, y - 1, direction)) {
 				maxCalls++;
 				return true;
 			}
-			if (generatePath(x + 1, y, new Random())) {
+			if (generatePath(x + 1, y, direction)) {
 				maxCalls++;
 				return true;
 			}
-			if (generatePath(x - 1, y, new Random())) {
+			if (generatePath(x - 1, y, direction)) {
 				maxCalls++;
 				return true;
 			}
-			if (generatePath(x, y + 1, new Random())) {
+			if (generatePath(x, y + 1, direction)) {
 				maxCalls++;
 				return true;
 			}
